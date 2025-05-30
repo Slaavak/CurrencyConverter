@@ -10,28 +10,24 @@ import SwiftUI
 struct CurrencyConverterView: View {
     @StateObject var viewModel: CurrencyConverterViewModel
 
-
-    var toAmount: String {
-        let value = Double(viewModel.fromAmount) ?? 0
-        let result = value * (viewModel.rate ?? 0.0)
-        return String(format: "%.2f", result)
-    }
-
     var body: some View {
-        VStack(spacing:16) {
-            CurrencyInputView(currency: $viewModel.fromCurrency,
-                                amount: $viewModel.fromAmount,
-                                  rate: viewModel.rate)
+        VStack(spacing: 16) {
+            CurrencyInputView(fromCurrency: $viewModel.fromCurrency,                     toCurrency: $viewModel.toCurrency,
+                                    amount: $viewModel.fromAmount,
+                                      rate: $viewModel.rate)
             swapButton
-            CurrencyOutputView(currency: $viewModel.toCurrency,
-                                 amount: toAmount,
-                                   rate: viewModel.rate)
+            CurrencyOutputView(fromCurrency: $viewModel.fromCurrency,                     toCurrency: $viewModel.toCurrency,
+                                     amount: $viewModel.toAmount,
+                                       rate: $viewModel.rate)
             Spacer()
         }
         .padding(.horizontal)
         .padding(.top)
     }
+}
 
+// MARK: - Private
+private extension CurrencyConverterView {
     var swapButton: some View {
         Button(action: {
             swap(&viewModel.fromCurrency, &viewModel.toCurrency)
