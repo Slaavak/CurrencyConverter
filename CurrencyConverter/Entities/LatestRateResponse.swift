@@ -18,18 +18,6 @@ extension LatestRateResponse {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let rawData = try container.decode([String: Double].self, forKey: .data)
-
-        var parsed: [Currency: Double] = [:]
-
-        for (key, value) in rawData {
-            if let currency = Currency(rawValue: key) {
-                parsed[currency] = value
-            } else {
-                print("Unable to parse currency \(key)")
-            }
-        }
-
-        self.data = parsed
+        self.data = try container.decode([Currency: Double].self, forKey: .data)
     }
 }
