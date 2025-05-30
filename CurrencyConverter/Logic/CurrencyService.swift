@@ -21,24 +21,33 @@ enum CurrencyServiceError: Error {
 class CurrencyService {
     private let urlBuilder: UrlBuilderProtocol
     private let session: URLSessionProtocol
+    private let cacheService: CurrencyCacheServiceProtocol
 
     init(
         urlBuilder: UrlBuilderProtocol = UrlBuilder(),
-        session: URLSessionProtocol = URLSession.shared
+        session: URLSessionProtocol = URLSession.shared,
+        cacheService: CurrencyCacheServiceProtocol = CurrencyCacheService()
     ) {
         self.urlBuilder = urlBuilder
         self.session = session
+        self.cacheService = cacheService
     }
 }
 
 extension CurrencyService: CurrencyServiceProtocol {
 
     func fetchRates(base: Currency, to currencies: [Currency]) async throws -> LatestRateResponse {
+        if let cached = cacheService.loadCachedRates(for: base) {
+            return LatestRateResponse(data: cached.rates)
+        }
+
         guard let url = urlBuilder.buildUrl(for: .latest(base: base, to: currencies)) else {
             throw CurrencyServiceError.invalidURL
         }
 
         let response: LatestRateResponse = try await fetch(url: url)
+        let cached = CachedRates(base: base, rates: response.data, cachedAt: Date())
+        cacheService.save(cached)
         return response
     }
 }

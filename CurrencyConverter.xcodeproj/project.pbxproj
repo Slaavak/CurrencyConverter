@@ -25,6 +25,7 @@
 		56214A2F2DE9387800B5E2FE /* CurrencyConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A2E2DE9387800B5E2FE /* CurrencyConverterViewModel.swift */; };
 		56214A312DE93E3400B5E2FE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 56214A302DE93E3400B5E2FE /* Config.xcconfig */; };
 		56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A322DE93FDA00B5E2FE /* Environment.swift */; };
+		56B78C8B2DEA776E00DA6D01 /* CurrencyCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		56214A302DE93E3400B5E2FE /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		56214A322DE93FDA00B5E2FE /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		56214A342DE941FB00B5E2FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCacheService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				56214A212DE91BEB00B5E2FE /* CurrencyService.swift */,
+				56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */,
 				56214A2B2DE92B4900B5E2FE /* UrlBuilder.swift */,
 				56214A322DE93FDA00B5E2FE /* Environment.swift */,
 				56214A292DE92B3E00B5E2FE /* URLSession.swift */,
@@ -238,6 +241,7 @@
 				56214A2C2DE92B4900B5E2FE /* UrlBuilder.swift in Sources */,
 				56214A2A2DE92B3E00B5E2FE /* URLSession.swift in Sources */,
 				56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */,
+				56B78C8B2DEA776E00DA6D01 /* CurrencyCacheService.swift in Sources */,
 				56214A282DE9231C00B5E2FE /* LatestRateResponse.swift in Sources */,
 				56214A1E2DE9150600B5E2FE /* CurrencyInputView.swift in Sources */,
 				56214A182DE9004A00B5E2FE /* HistoryView.swift in Sources */,
