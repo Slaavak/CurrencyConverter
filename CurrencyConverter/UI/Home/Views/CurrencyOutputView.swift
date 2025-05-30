@@ -10,6 +10,7 @@ import SwiftUI
 struct CurrencyOutputView: View {
     @Binding var currency: Currency
     var amount: String
+    var rate: Double?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -25,9 +26,11 @@ struct CurrencyOutputView: View {
             .buttonStyle(.plain)
             .padding(.bottom, 2)
 
-            Text("1 \(currency.code) ≈ ...")
-                .font(.caption)
-                .foregroundColor(.gray)
+            if let rate {
+                Text("1 \(currency.code) ≈ \(String(format: "%.2f", rate))")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
 
             Text(amount)
                 .font(.largeTitle.bold())
