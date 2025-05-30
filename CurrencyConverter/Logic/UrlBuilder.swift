@@ -20,8 +20,10 @@ class UrlBuilder {
         var url: String {
             switch self {
             case .latest(let baseCurrency, let toCurrencies):
+                guard let apiKey = EnvironmentKeys.currencyApiKey else { return "" }
+
                 let currencies = toCurrencies.map(\.code).joined(separator: ",")
-                return "/latest?apikey=YOUR_API_KEY&base_currency=\(baseCurrency.code)&currencies=\(currencies)"
+                return "/latest?apikey=\(apiKey)&base_currency=\(baseCurrency.code)&currencies=\(currencies)"
             }
         }
     }

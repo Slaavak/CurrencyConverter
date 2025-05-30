@@ -23,6 +23,8 @@
 		56214A2A2DE92B3E00B5E2FE /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A292DE92B3E00B5E2FE /* URLSession.swift */; };
 		56214A2C2DE92B4900B5E2FE /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A2B2DE92B4900B5E2FE /* UrlBuilder.swift */; };
 		56214A2F2DE9387800B5E2FE /* CurrencyConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A2E2DE9387800B5E2FE /* CurrencyConverterViewModel.swift */; };
+		56214A312DE93E3400B5E2FE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 56214A302DE93E3400B5E2FE /* Config.xcconfig */; };
+		56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A322DE93FDA00B5E2FE /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,9 @@
 		56214A292DE92B3E00B5E2FE /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		56214A2B2DE92B4900B5E2FE /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
 		56214A2E2DE9387800B5E2FE /* CurrencyConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewModel.swift; sourceTree = "<group>"; };
+		56214A302DE93E3400B5E2FE /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		56214A322DE93FDA00B5E2FE /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		56214A342DE941FB00B5E2FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +93,10 @@
 				56214A122DE8FB7E00B5E2FE /* UI */,
 				56214A072DE8FB7A00B5E2FE /* Preview Content */,
 				56214A082DE8FB7A00B5E2FE /* Assets.xcassets */,
+				56214A342DE941FB00B5E2FE /* Info.plist */,
 				56214A0A2DE8FB7A00B5E2FE /* CurrencyConverterApp.swift */,
 				56214A0B2DE8FB7A00B5E2FE /* Item.swift */,
+				56214A302DE93E3400B5E2FE /* Config.xcconfig */,
 			);
 			path = CurrencyConverter;
 			sourceTree = "<group>";
@@ -129,6 +136,7 @@
 			children = (
 				56214A212DE91BEB00B5E2FE /* CurrencyService.swift */,
 				56214A2B2DE92B4900B5E2FE /* UrlBuilder.swift */,
+				56214A322DE93FDA00B5E2FE /* Environment.swift */,
 				56214A292DE92B3E00B5E2FE /* URLSession.swift */,
 			);
 			path = Logic;
@@ -213,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56214A0D2DE8FB7A00B5E2FE /* Preview Assets.xcassets in Resources */,
+				56214A312DE93E3400B5E2FE /* Config.xcconfig in Resources */,
 				56214A0E2DE8FB7A00B5E2FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +237,7 @@
 				56214A142DE8FE4800B5E2FE /* Currency.swift in Sources */,
 				56214A2C2DE92B4900B5E2FE /* UrlBuilder.swift in Sources */,
 				56214A2A2DE92B3E00B5E2FE /* URLSession.swift in Sources */,
+				56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */,
 				56214A282DE9231C00B5E2FE /* LatestRateResponse.swift in Sources */,
 				56214A1E2DE9150600B5E2FE /* CurrencyInputView.swift in Sources */,
 				56214A182DE9004A00B5E2FE /* HistoryView.swift in Sources */,
@@ -246,6 +256,7 @@
 /* Begin XCBuildConfiguration section */
 		562149EB2DE8F7D600B5E2FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56214A302DE93E3400B5E2FE /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -309,6 +320,7 @@
 		};
 		562149EC2DE8F7D600B5E2FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56214A302DE93E3400B5E2FE /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -365,6 +377,7 @@
 		};
 		562149EE2DE8F7D600B5E2FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56214A302DE93E3400B5E2FE /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -374,6 +387,7 @@
 				DEVELOPMENT_TEAM = T453GJ7576;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -394,6 +408,7 @@
 		};
 		562149EF2DE8F7D600B5E2FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56214A302DE93E3400B5E2FE /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -403,6 +418,7 @@
 				DEVELOPMENT_TEAM = T453GJ7576;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

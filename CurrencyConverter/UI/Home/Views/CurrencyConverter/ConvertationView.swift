@@ -8,35 +8,24 @@
 import SwiftUI
 
 struct CurrencyConverterView: View {
-    @State private var fromCurrency: Currency = .USD
-    @State private var toCurrency: Currency = .EUR
-    @State private var fromAmount: String = "1"
+    @StateObject var viewModel: CurrencyConverterViewModel
 
-    var viewModel: CurrencyConverterViewModel
-
-    init(viewModel: CurrencyConverterViewModel) {
-        self.viewModel = viewModel
-    }
-
-    var rate: Double? {
-        viewModel.currentRates[toCurrency]
-    }
 
     var toAmount: String {
-        let value = Double(fromAmount) ?? 0
-        let result = value * (rate ?? 0.0)
+        let value = Double(viewModel.fromAmount) ?? 0
+        let result = value * (viewModel.rate ?? 0.0)
         return String(format: "%.2f", result)
     }
 
     var body: some View {
         VStack(spacing:16) {
-            CurrencyInputView(currency: $fromCurrency,
-                                amount: $fromAmount,
-                                  rate: rate)
+            CurrencyInputView(currency: $viewModel.fromCurrency,
+                                amount: $viewModel.fromAmount,
+                                  rate: viewModel.rate)
             swapButton
-            CurrencyOutputView(currency: $toCurrency,
+            CurrencyOutputView(currency: $viewModel.toCurrency,
                                  amount: toAmount,
-                                   rate: rate)
+                                   rate: viewModel.rate)
             Spacer()
         }
         .padding(.horizontal)
@@ -45,7 +34,7 @@ struct CurrencyConverterView: View {
 
     var swapButton: some View {
         Button(action: {
-            swap(&fromCurrency, &toCurrency)
+            swap(&viewModel.fromCurrency, &viewModel.toCurrency)
         }) {
             Image(systemName: "arrow.up.arrow.down")
                 .foregroundColor(.white)

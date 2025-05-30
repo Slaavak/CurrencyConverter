@@ -43,5 +43,6 @@ struct CurrencyOutputView: View {
 
 #Preview {
     CurrencyOutputView(currency: .constant(.AUD),
-                         amount: "100")
+                         amount: "100",
+                           rate: 1.5)
 }

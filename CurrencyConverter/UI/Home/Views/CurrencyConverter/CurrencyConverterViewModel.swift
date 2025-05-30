@@ -7,10 +7,17 @@
 
 import Foundation
 
+@MainActor
 final class CurrencyConverterViewModel: ObservableObject {
 
     var currencyService: CurrencyServiceProtocol
-    var currentRates: [Currency: Double] = [:]
+
+    @Published var fromCurrency: Currency = .USD
+    @Published var toCurrency: Currency = .EUR
+    @Published var fromAmount: String = "1"
+    @Published var rate: Double?
+
+    @Published var currentRates: [Currency: Double] = [:]
 
     init(currencyService: CurrencyServiceProtocol) {
         self.currencyService = currencyService
@@ -18,6 +25,7 @@ final class CurrencyConverterViewModel: ObservableObject {
         Task {
             let response = try await currencyService.fetchRates(base: .USD, to: Currency.allCases)
             currentRates = response.data
+            rate = currentRates[toCurrency]
         }
     }
 }
