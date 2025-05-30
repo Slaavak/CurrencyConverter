@@ -39,3 +39,7 @@ struct CurrencyInputView: View {
     }
 }
 
+#Preview {
+    CurrencyInputView(currency: .constant(.AUD),
+                        amount: .constant("100"))
+}

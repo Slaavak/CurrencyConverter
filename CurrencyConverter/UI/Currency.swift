@@ -8,10 +8,9 @@
 import Foundation
 
 enum Currency: String, CaseIterable, Identifiable, Hashable {
-    var id: String { self.rawValue }
-
     case EUR, USD, JPY, BGN, CZK, DKK, GBP, HUF, PLN, RON, SEK, CHF, ISK, NOK, HRK, RUB, TRY, AUD, BRL, CAD, CNY, HKD, IDR, ILS, INR, KRW, MXN, MYR, NZD, PHP, SGD, THB, ZAR
 
+    var id: String { self.rawValue }
     var code: String { self.rawValue }
 
     var flag: String {

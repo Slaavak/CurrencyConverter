@@ -37,3 +37,8 @@ struct CurrencyOutputView: View {
         .shadow(radius: 2)
     }
 }
+
+#Preview {
+    CurrencyOutputView(currency: .constant(.AUD),
+                         amount: "100")
+}

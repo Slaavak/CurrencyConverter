@@ -49,5 +49,7 @@ struct CurrencyConverterView: View {
 }
 
 #Preview {
-    CurrencyConverterView()
+    let service = CurrencyService()
+    let viewModel = CurrencyConverterViewModel( currencyService: service)
+    CurrencyConverterView(viewModel: viewModel)
 }

@@ -9,12 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-
+    private var currencyService = CurrencyService()
 
     var body: some View {
         NavigationView {
             VStack {
-                CurrencyConverterView()
+                CurrencyConverterView(
+                    viewModel: CurrencyConverterViewModel(
+                        currencyService: currencyService
+                    )
+                )
                 HistoryView()
             }
             .navigationTitle("Currency Converter")
@@ -24,5 +28,4 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

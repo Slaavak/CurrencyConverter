@@ -33,3 +33,7 @@ struct CurrencyPickerView: View {
         .navigationTitle("Choose Currency")
     }
 }
+
+#Preview {
+    CurrencyPickerView(selection: .constant(.USD))
+}
