@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct CurrencyInputView: View {
-    @Binding var currency: Currency
+    @Binding var fromCurrency: Currency
+    @Binding var toCurrency: Currency
     @Binding var amount: String
-    var rate: Double?
+    @Binding var rate: Double?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             NavigationLink {
-                CurrencyPickerView(selection: $currency)
+                CurrencyPickerView(selection: $fromCurrency)
             } label: {
                 HStack {
-                    Text(currency.code + " - " + currency.title)
+                    Text(fromCurrency.code + " - " + fromCurrency.title)
                     Spacer()
                     Image(systemName: "chevron.down")
                 }
@@ -27,7 +28,7 @@ struct CurrencyInputView: View {
             .padding(.bottom, 2)
 
             if let rate {
-                Text("1 \(currency.code) ≈ \(String(format: "%.2f", rate))")
+                Text("1 \(fromCurrency.code) ≈ \(String(format: "%.2f", rate)) \(toCurrency.code)")
                     .font(.caption)
                     .foregroundColor(.gray)
             }
@@ -43,6 +44,8 @@ struct CurrencyInputView: View {
 }
 
 #Preview {
-    CurrencyInputView(currency: .constant(.AUD),
-                        amount: .constant("100"))
+    CurrencyInputView(fromCurrency: .constant(.USD),
+                        toCurrency: .constant(.AUD),
+                            amount: .constant("100"),
+                              rate: .constant(1.34))
 }
