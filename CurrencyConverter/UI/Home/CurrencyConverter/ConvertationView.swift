@@ -12,11 +12,13 @@ struct CurrencyConverterView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            CurrencyInputView(fromCurrency: $viewModel.fromCurrency,                     toCurrency: $viewModel.toCurrency,
+            CurrencyInputView(fromCurrency: $viewModel.fromCurrency,
+                                toCurrency: $viewModel.toCurrency,
                                     amount: $viewModel.fromAmount,
                                       rate: $viewModel.rate)
             swapButton
-            CurrencyOutputView(fromCurrency: $viewModel.fromCurrency,                     toCurrency: $viewModel.toCurrency,
+            CurrencyOutputView(fromCurrency: $viewModel.fromCurrency,
+                                 toCurrency: $viewModel.toCurrency,
                                      amount: $viewModel.toAmount,
                                        rate: $viewModel.rate)
             Spacer()
@@ -43,6 +45,6 @@ private extension CurrencyConverterView {
 
 #Preview {
     let service = CurrencyService()
-    let viewModel = CurrencyConverterViewModel( currencyService: service)
+    let viewModel = CurrencyConverterViewModel(currencyService: service)
     CurrencyConverterView(viewModel: viewModel)
 }

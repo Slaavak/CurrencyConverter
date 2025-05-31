@@ -7,16 +7,10 @@
 
 import Foundation
 
-struct CachedRates: Codable, Equatable {
-    let base: Currency
-    var rates: [Currency: Double]
-    var cachedAt: Date
-}
 protocol CurrencyCacheServiceProtocol {
     func loadCachedRates(for base: Currency) -> CachedRates?
     func save(_ rates: CachedRates)
     func clearCache()
-    func isCacheValid(for base: Currency) -> Bool
 }
 
 class CurrencyCacheService: CurrencyCacheServiceProtocol {
@@ -28,7 +22,8 @@ class CurrencyCacheService: CurrencyCacheServiceProtocol {
     func loadCachedRates(for base: Currency) -> CachedRates? {
         guard let data = try? Data(contentsOf: cacheURL),
               let cachedList = try? JSONDecoder().decode([CachedRates].self, from: data),
-              let cached = cachedList.first(where: { $0.base == base }) else {
+              let cached = cachedList.first(where: { $0.base == base }),
+              isCacheValid(cached) else {
             return nil
         }
         return cached

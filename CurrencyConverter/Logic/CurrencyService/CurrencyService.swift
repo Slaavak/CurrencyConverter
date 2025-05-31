@@ -38,6 +38,7 @@ extension CurrencyService: CurrencyServiceProtocol {
 
     func fetchRates(base: Currency, to currencies: [Currency]) async throws -> LatestRateResponse {
         if let cached = cacheService.loadCachedRates(for: base) {
+            print("Take cache for base: \(base)")
             return LatestRateResponse(data: cached.rates)
         }
 
