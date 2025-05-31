@@ -50,9 +50,12 @@ class CurrencyCacheService: CurrencyCacheServiceProtocol {
     func clearCache() {
         try? fileManager.removeItem(at: cacheURL)
     }
+}
 
-    func isCacheValid(for base: Currency) -> Bool {
-        guard let cached = loadCachedRates(for: base) else { return false }
+// MARK: - Private
+private extension CurrencyCacheService {
+
+    func isCacheValid(_ cached: CachedRates) -> Bool {
         return Date().timeIntervalSince(cached.cachedAt) < 86400
     }
 }

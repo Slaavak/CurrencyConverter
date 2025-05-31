@@ -46,10 +46,15 @@ extension CurrencyService: CurrencyServiceProtocol {
             throw CurrencyServiceError.invalidURL
         }
 
-        let response: LatestRateResponse = try await fetch(url: url)
-        let cached = CachedRates(base: base, rates: response.data, cachedAt: Date())
-        cacheService.save(cached)
-        return response
+        do {
+            let response: LatestRateResponse = try await fetch(url: url)
+            let cached = CachedRates(base: base, rates: response.data, cachedAt: Date())
+            cacheService.save(cached)
+            return response
+        } catch {
+            print(error.localizedDescription)
+            throw error
+        }
     }
 }
 
