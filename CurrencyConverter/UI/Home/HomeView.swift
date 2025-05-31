@@ -11,17 +11,37 @@ import SwiftData
 struct HomeView: View {
     private var currencyService = CurrencyService()
 
+    @State private var isExpanded = false
+
     var body: some View {
+
         NavigationView {
             VStack {
-                CurrencyConverterView(
-                    viewModel: CurrencyConverterViewModel(
-                        currencyService: currencyService
+                if !isExpanded {
+                    CurrencyConverterView(
+                        viewModel: CurrencyConverterViewModel(
+                            currencyService: currencyService
+                        )
                     )
-                )
-                HistoryView()
+                }
+                HistoryView(viewModel: .init(), isExpanded: $isExpanded)
             }
-            .navigationTitle("Currency Converter")
+            .navigationTitle(isExpanded ? "History" : "Currency Converter")
+            .toolbar {
+                if isExpanded {
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation {
+                                isExpanded.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .padding(.trailing)
+                        }
+                    }
+                }
+            }
         }
     }
 }

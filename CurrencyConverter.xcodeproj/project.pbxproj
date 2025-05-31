@@ -27,6 +27,7 @@
 		56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A322DE93FDA00B5E2FE /* Environment.swift */; };
 		56B78C8B2DEA776E00DA6D01 /* CurrencyCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */; };
 		56B78C8E2DEAF41600DA6D01 /* CachedRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C8D2DEAF41600DA6D01 /* CachedRates.swift */; };
+		56B78C932DEAFB0800DA6D01 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C922DEAFB0800DA6D01 /* HistoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		56214A342DE941FB00B5E2FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCacheService.swift; sourceTree = "<group>"; };
 		56B78C8D2DEAF41600DA6D01 /* CachedRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedRates.swift; sourceTree = "<group>"; };
+		56B78C922DEAFB0800DA6D01 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				56214A172DE9004A00B5E2FE /* HistoryView.swift */,
+				56B78C922DEAFB0800DA6D01 /* HistoryViewModel.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56214A222DE91BEB00B5E2FE /* CurrencyService.swift in Sources */,
+				56B78C932DEAFB0800DA6D01 /* HistoryViewModel.swift in Sources */,
 				56214A142DE8FE4800B5E2FE /* Currency.swift in Sources */,
 				56214A2C2DE92B4900B5E2FE /* UrlBuilder.swift in Sources */,
 				56214A2A2DE92B3E00B5E2FE /* URLSession.swift in Sources */,

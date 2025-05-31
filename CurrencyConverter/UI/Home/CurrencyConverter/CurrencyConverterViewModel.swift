@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 @MainActor
 final class CurrencyConverterViewModel: ObservableObject {
@@ -24,14 +25,25 @@ final class CurrencyConverterViewModel: ObservableObject {
     init(currencyService: CurrencyServiceProtocol) {
         self.currencyService = currencyService
 
+        self.loadDefaultRates()
+        self.setUpSubscriptions()
+    }
+}
+
+//MARK: - Private
+private extension CurrencyConverterViewModel {
+
+    func setUpSubscriptions() {
         $fromCurrency.sink { [weak self] currency in
             guard let self else { return }
+            UserDefaults.standard.set(currency.rawValue, forKey: "lastFromCurrency")
             self.fetchRates(currency)
         }
         .store(in: &cancellables)
 
         $toCurrency.sink { [weak self] currency in
             guard let self else { return }
+            UserDefaults.standard.set(currency.rawValue, forKey: "lastToCurrency")
             rate = currentRates[currency]
             updateToAmount()
         }
@@ -43,10 +55,18 @@ final class CurrencyConverterViewModel: ObservableObject {
         }
         .store(in: &cancellables)
     }
-}
 
-//MARK: - Private
-private extension CurrencyConverterViewModel {
+    func loadDefaultRates() {
+        if let fromRaw = UserDefaults.standard.string(forKey: "lastFromCurrency"),
+           let from = Currency(rawValue: fromRaw) {
+            self.fromCurrency = from
+        }
+
+        if let toRaw = UserDefaults.standard.string(forKey: "lastToCurrency"),
+           let to = Currency(rawValue: toRaw) {
+            self.toCurrency = to
+        }
+    }
 
     func fetchRates(_ currency: Currency) {
         Task {

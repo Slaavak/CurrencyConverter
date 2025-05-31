@@ -12,6 +12,7 @@ struct CurrencyInputView: View {
     @Binding var toCurrency: Currency
     @Binding var amount: String
     @Binding var rate: Double?
+    @FocusState var isFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -36,6 +37,16 @@ struct CurrencyInputView: View {
             TextField("Amount", text: $amount)
                 .keyboardType(.decimalPad)
                 .font(.largeTitle.bold())
+                .focused($isFocused)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+
+                        Button("Done") {
+                            isFocused = false
+                        }
+                     }
+                }
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
