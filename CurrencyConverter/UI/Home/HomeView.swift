@@ -10,6 +10,10 @@ import SwiftData
 
 struct HomeView: View {
     private var currencyService = CurrencyService()
+    private var dataSource = DataSource(
+        container: SwiftDataContextManager.shared.container,
+        context: SwiftDataContextManager.shared.context
+    )
 
     @State private var isExpanded = false
 
@@ -24,7 +28,10 @@ struct HomeView: View {
                         )
                     )
                 }
-                HistoryView(viewModel: .init(), isExpanded: $isExpanded)
+                HistoryView(
+                    viewModel: HistoryViewModel(dataSource: dataSource),
+                   isExpanded: $isExpanded
+                )
             }
             .navigationTitle(isExpanded ? "History" : "Currency Converter")
             .toolbar {
@@ -37,6 +44,7 @@ struct HomeView: View {
                         } label: {
                             Image(systemName: "xmark")
                                 .resizable()
+                                .frame(width: 20, height: 20)
                                 .padding(.trailing)
                         }
                     }
