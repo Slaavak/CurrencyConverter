@@ -14,7 +14,7 @@ struct CurrencyOutputView: View {
     @Binding var rate: Double?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 2) {
             NavigationLink {
                 CurrencyPickerView(selection: $toCurrency)
             } label: {
@@ -36,9 +36,12 @@ struct CurrencyOutputView: View {
             Text(amount)
                 .font(.largeTitle.bold())
         }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
-        .shadow(radius: 2)
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white)
+                .shadow(radius: 2)
+        )
     }
 }
 

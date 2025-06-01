@@ -15,7 +15,7 @@ struct CurrencyInputView: View {
     @FocusState var isFocused: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 2) {
             NavigationLink {
                 CurrencyPickerView(selection: $fromCurrency)
             } label: {
@@ -48,9 +48,12 @@ struct CurrencyInputView: View {
                      }
                 }
         }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
-        .shadow(radius: 2)
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white)
+                .shadow(radius: 2)
+        )
     }
 }
 

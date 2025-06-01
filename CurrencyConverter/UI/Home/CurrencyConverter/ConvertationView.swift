@@ -11,7 +11,7 @@ struct CurrencyConverterView: View {
     @StateObject var viewModel: CurrencyConverterViewModel
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             CurrencyInputView(fromCurrency: $viewModel.fromCurrency,
                                 toCurrency: $viewModel.toCurrency,
                                     amount: $viewModel.fromAmount,
