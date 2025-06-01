@@ -5,39 +5,41 @@
 //  Created by Slava Korolevich on 31/05/2025.
 //
 
-import Foundation
+import SwiftUI
+import SwiftData
 
 @MainActor
 class HistoryViewModel: ObservableObject {
-    struct ConversionItem: Identifiable {
-        let id = UUID()
-        let fromCurrency: String
-        let toCurrency: String
-        let fromAmount: Double
-        let toAmount: Double
+
+    @Published var searchText: String = ""
+    @Published var items: [Record] = []
+
+    var dataSource: DataSource
+
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
+
+        Task {
+            items = dataSource.fetchRecords()
+        }
     }
 
-    @Published var items: [ConversionItem] = [
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 1, toAmount: 91),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 2, toAmount: 4900.231),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 3, toAmount: 250.231),
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 4, toAmount: 91.57),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 5, toAmount: 4900.88),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 6, toAmount: 250.21),
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 7, toAmount: 91.231),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 8, toAmount: 4900.031),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 9, toAmount: 250.11),
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 10, toAmount: 91.002),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 11, toAmount: 4900.02),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 12, toAmount: 250),
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 13, toAmount: 91),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 14, toAmount: 4900),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 15, toAmount: 250),
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 16, toAmount: 91),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 17, toAmount: 4900),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 18, toAmount: 250),
-        .init(fromCurrency: "USD", toCurrency: "EUR", fromAmount: 19, toAmount: 91),
-        .init(fromCurrency: "EUR", toCurrency: "RUB", fromAmount: 20, toAmount: 4900),
-        .init(fromCurrency: "GBP", toCurrency: "USD", fromAmount: 21, toAmount: 250)
-    ]
+    var filteredItems: [Record] {
+        guard !searchText.isEmpty else { return items }
+
+        let normalizedSearchText = searchText.replacingOccurrences(of: ",", with: ".")
+        if let _ = Double(normalizedSearchText) {
+            return items.filter {
+                String(format: "%.2f", $0.fromValue).contains(normalizedSearchText) ||
+                String(format: "%.2f", $0.toValue).contains(normalizedSearchText)
+            }
+        }
+
+        let query = searchText.lowercased()
+        return items.filter {
+            $0.fromCurrency.rawValue.lowercased().contains(query) ||
+            $0.toCurrency.rawValue.lowercased().contains(query)
+        }
+    }
+
 }
