@@ -9,6 +9,12 @@ import SwiftUI
 import SwiftData
 import Combine
 
+protocol HistoryViewModelProtocol {
+    var filteredItems: [Record] { get }
+
+    func loadMore() async
+}
+
 @MainActor
 class HistoryViewModel: ObservableObject {
 
@@ -28,7 +34,10 @@ class HistoryViewModel: ObservableObject {
         self.loadInitial()
         self.setUpSubscriptions()
     }
+}
 
+//MARK: - Public
+extension HistoryViewModel {
     var filteredItems: [Record] {
         guard !searchText.isEmpty else { return items }
 
@@ -46,10 +55,7 @@ class HistoryViewModel: ObservableObject {
             $0.toCurrency.rawValue.lowercased().contains(query)
         }
     }
-}
 
-//MARK: - Public
-extension HistoryViewModel {
     func loadMore() async {
         guard hasMoreItems else { return }
 
@@ -68,7 +74,9 @@ private extension HistoryViewModel {
             .sink { [weak self] in
                 guard let self else { return }
                 Task {
-                    self.items = await self.dataSource.fetchRecords()
+                    self.items = await self.dataSource.fetchRecords(limit: 20, offset: 0)
+                    self.currentOffset = 0
+                    self.hasMoreItems = true
                 }
             }
             .store(in: &cancellables)
@@ -76,7 +84,7 @@ private extension HistoryViewModel {
 
     func loadInitial() {
         Task {
-            let fetched = await dataSource.fetchRecords(limit: pageSize)
+            let fetched = await dataSource.fetchRecords(limit: pageSize, offset: 0)
             items = fetched
             currentOffset = fetched.count
             hasMoreItems = fetched.count == pageSize

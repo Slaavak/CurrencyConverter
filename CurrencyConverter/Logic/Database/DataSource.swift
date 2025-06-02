@@ -10,6 +10,8 @@ import SwiftData
 import Combine
 
 protocol DataSourceProtocol: AnyObject {
+    var didInsertRecord: PassthroughSubject<Void, Never> { get }
+
     func insert(_ entity: Record) async
     func fetchRecords(limit: Int, offset: Int) async -> [Record]
 }
@@ -17,7 +19,7 @@ protocol DataSourceProtocol: AnyObject {
 @MainActor
 class DataSource {
 
-    let didInsertRecord = PassthroughSubject<Void, Never>()
+    nonisolated let didInsertRecord = PassthroughSubject<Void, Never>()
 
     private let container: ModelContainer?
     private let context: ModelContext?
