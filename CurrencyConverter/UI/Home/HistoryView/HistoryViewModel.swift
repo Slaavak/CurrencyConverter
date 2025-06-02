@@ -48,7 +48,19 @@ class HistoryViewModel: ObservableObject {
     }
 }
 
-//MARK: - HistoryViewModel
+//MARK: - Public
+extension HistoryViewModel {
+    func loadMore() {
+        guard hasMoreItems else { return }
+
+        let fetched = dataSource.fetchRecords(limit: pageSize, offset: currentOffset)
+        items.append(contentsOf: fetched)
+        currentOffset += fetched.count
+        hasMoreItems = fetched.count == pageSize
+    }
+}
+
+//MARK: - Private
 private extension HistoryViewModel {
     func setUpSubscriptions() {
         dataSource.didInsertRecord
@@ -64,15 +76,6 @@ private extension HistoryViewModel {
         let fetched = dataSource.fetchRecords(limit: pageSize)
         items = fetched
         currentOffset = fetched.count
-        hasMoreItems = fetched.count == pageSize
-    }
-
-    func loadMore() {
-        guard hasMoreItems else { return }
-
-        let fetched = dataSource.fetchRecords(limit: pageSize, offset: currentOffset)
-        items.append(contentsOf: fetched)
-        currentOffset += fetched.count
         hasMoreItems = fetched.count == pageSize
     }
 }

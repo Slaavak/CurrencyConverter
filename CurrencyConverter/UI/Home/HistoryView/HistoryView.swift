@@ -56,22 +56,38 @@ struct HistoryView: View {
             .frame(maxWidth: .infinity)
             .transition(.opacity)
         } else {
-            List(items) { item in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(item.fromValue, specifier: "%.2f") \(item.fromCurrency.rawValue)")
-                            .font(.headline)
-                        Text("\(item.toValue, specifier: "%.2f") \(item.toCurrency.rawValue)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+            List {
+                ForEach(items) { item in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("\(item.fromValue, specifier: "%.2f") \(item.fromCurrency.rawValue)")
+                                .font(.headline)
+                            Text("\(item.toValue, specifier: "%.2f") \(item.toCurrency.rawValue)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "arrow.right.arrow.left")
+                            .foregroundColor(.blue)
                     }
-
-                    Spacer()
-
-                    Image(systemName: "arrow.right.arrow.left")
-                        .foregroundColor(.blue)
+                    .padding(.vertical, 4)
+                    .onAppear {
+                        if isExpanded, item == items.last {
+                            viewModel.loadMore()
+                        }
+                    }
                 }
-                .padding(.vertical, 4)
+
+                if viewModel.hasMoreItems, isExpanded {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .padding()
+                }
             }
             .if(isExpanded) {
                 $0.searchable(text: $viewModel.searchText, prompt: "Поиск по валютам или суммам")

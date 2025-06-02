@@ -24,7 +24,8 @@ struct HomeView: View {
                 if !isExpanded {
                     CurrencyConverterView(
                         viewModel: CurrencyConverterViewModel(
-                            currencyService: currencyService
+                            currencyService: currencyService,
+                            dataSource: dataSource
                         )
                     )
                 }

@@ -13,10 +13,10 @@ struct CurrencyOutputView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             NavigationLink {
-                CurrencyPickerView(selection: $toCurrency)
+                CurrencyPickerView(selection: $viewModel.toCurrency)
             } label: {
                 HStack {
-                    Text(toCurrency.code + " - " + toCurrency.title)
+                    Text(viewModel.toCurrency.code + " - " + viewModel.toCurrency.title)
                     Spacer()
                     Image(systemName: "chevron.down")
                 }
@@ -24,13 +24,13 @@ struct CurrencyOutputView: View {
             .buttonStyle(.plain)
             .padding(.bottom, 2)
 
-            if let rate {
-                Text("1 \(toCurrency.code) ≈ \(String(format: "%.2f", 1.0 / rate)) \(fromCurrency.code)")
+            if let rate = viewModel.rate {
+                Text("1 \(viewModel.toCurrency.code) ≈ \(String(format: "%.2f", 1.0 / rate)) \(viewModel.fromCurrency.code)")
                     .font(.caption)
                     .foregroundColor(.gray)
             }
 
-            Text(amount)
+            Text(viewModel.toAmount)
                 .font(.largeTitle.bold())
         }
         .padding(12)
@@ -40,11 +40,4 @@ struct CurrencyOutputView: View {
                 .shadow(radius: 2)
         )
     }
-}
-
-#Preview {
-    CurrencyOutputView(fromCurrency: .constant(.USD),
-                         toCurrency: .constant(.AUD),
-                             amount: .constant("100"),
-                               rate: .constant(1.5))
 }
