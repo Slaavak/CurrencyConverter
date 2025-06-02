@@ -106,14 +106,13 @@
 		56214A0C2DE8FB7A00B5E2FE /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				56C46B012DEDB1AE0051F2E5 /* Resources */,
 				56B78CA32DEB2A9000DA6D01 /* Extensions */,
 				56214A262DE922D400B5E2FE /* Entities */,
 				56214A252DE91BFF00B5E2FE /* Logic */,
 				56214A122DE8FB7E00B5E2FE /* UI */,
 				56214A072DE8FB7A00B5E2FE /* Preview Content */,
-				56214A082DE8FB7A00B5E2FE /* Assets.xcassets */,
 				56214A342DE941FB00B5E2FE /* Info.plist */,
-				56214A0A2DE8FB7A00B5E2FE /* CurrencyConverterApp.swift */,
 				56214A302DE93E3400B5E2FE /* Config.xcconfig */,
 			);
 			path = CurrencyConverter;
@@ -122,6 +121,7 @@
 		56214A122DE8FB7E00B5E2FE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				56214A0A2DE8FB7A00B5E2FE /* CurrencyConverterApp.swift */,
 				56214A1F2DE9152000B5E2FE /* Home */,
 			);
 			path = UI;
@@ -165,7 +165,6 @@
 			children = (
 				56214A132DE8FE4800B5E2FE /* Currency.swift */,
 				56214A272DE9231C00B5E2FE /* LatestRateResponse.swift */,
-				565CC1AD2DEDAA7F00E8E93E /* Localizable.xcstrings */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -232,6 +231,15 @@
 				56B78CA92DEB710500DA6D01 /* DataSource.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		56C46B012DEDB1AE0051F2E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				565CC1AD2DEDAA7F00E8E93E /* Localizable.xcstrings */,
+				56214A082DE8FB7A00B5E2FE /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
