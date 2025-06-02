@@ -7,9 +7,13 @@
 
 import Foundation
 import SwiftData
+import Combine
 
 @MainActor
 class DataSource {
+
+    let didInsertRecord = PassthroughSubject<Void, Never>()
+
     private let container: ModelContainer?
     private let context: ModelContext?
 
@@ -23,11 +27,15 @@ extension DataSource {
     func insert(_ entity: Record) {
         self.container?.mainContext.insert(entity)
         try? self.container?.mainContext.save()
+        didInsertRecord.send()
     }
 
-    func fetchRecords() -> [Record] {
-        let fetchDescriptor = FetchDescriptor<Record>(sortBy: [SortDescriptor(\.timestamp, order: .reverse)])
-        let contacts = try? self.container?.mainContext.fetch(fetchDescriptor)
-        return contacts ?? []
+    func fetchRecords(limit: Int = 20, offset: Int = 0) -> [Record] {
+        var fetchDescriptor = FetchDescriptor<Record>()
+        fetchDescriptor.sortBy = [SortDescriptor(\.timestamp, order: .reverse)]
+        fetchDescriptor.fetchLimit = limit
+        fetchDescriptor.fetchOffset = offset
+
+        return (try? self.container?.mainContext.fetch(fetchDescriptor)) ?? []
     }
 }
