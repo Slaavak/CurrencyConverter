@@ -63,7 +63,6 @@ extension CurrencyService {
         request.httpMethod = "GET"
         request.timeoutInterval = 10
 
-        self.log(request)
         let (data, response): (Data, URLResponse)
         do {
             (data, response) = try await session.data(for: request)
@@ -85,9 +84,5 @@ extension CurrencyService {
         } catch {
             throw CurrencyServiceError.decodingFailed
         }
-    }
-
-    func log(_ request: URLRequest) {
-        debugPrint("📡 Requesting: \(request.url?.absoluteString ?? "nil")")
     }
 }
