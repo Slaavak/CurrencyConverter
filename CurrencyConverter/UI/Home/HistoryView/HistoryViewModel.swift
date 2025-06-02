@@ -7,21 +7,26 @@
 
 import SwiftUI
 import SwiftData
+import Combine
 
 @MainActor
 class HistoryViewModel: ObservableObject {
 
+    var dataSource: DataSource
+
     @Published var searchText: String = ""
     @Published var items: [Record] = []
+    @Published var hasMoreItems = true
 
-    var dataSource: DataSource
+    private let pageSize = 20
+    private var currentOffset = 0
+    private var cancellables = Set<AnyCancellable>()
 
     init(dataSource: DataSource) {
         self.dataSource = dataSource
 
-        Task {
-            items = dataSource.fetchRecords()
-        }
+        self.loadInitial()
+        self.setUpSubscriptions()
     }
 
     var filteredItems: [Record] {
@@ -41,5 +46,33 @@ class HistoryViewModel: ObservableObject {
             $0.toCurrency.rawValue.lowercased().contains(query)
         }
     }
+}
 
+//MARK: - HistoryViewModel
+private extension HistoryViewModel {
+    func setUpSubscriptions() {
+        dataSource.didInsertRecord
+            .receive(on: RunLoop.main)
+            .sink { [weak self] in
+                guard let self else { return }
+                self.items = dataSource.fetchRecords()
+            }
+            .store(in: &cancellables)
+    }
+
+    func loadInitial() {
+        let fetched = dataSource.fetchRecords(limit: pageSize)
+        items = fetched
+        currentOffset = fetched.count
+        hasMoreItems = fetched.count == pageSize
+    }
+
+    func loadMore() {
+        guard hasMoreItems else { return }
+
+        let fetched = dataSource.fetchRecords(limit: pageSize, offset: currentOffset)
+        items.append(contentsOf: fetched)
+        currentOffset += fetched.count
+        hasMoreItems = fetched.count == pageSize
+    }
 }
