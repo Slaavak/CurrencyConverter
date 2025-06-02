@@ -12,7 +12,7 @@ import Combine
 @MainActor
 class HistoryViewModel: ObservableObject {
 
-    var dataSource: DataSource
+    var dataSource: DataSourceProtocol
 
     @Published var searchText: String = ""
     @Published var items: [Record] = []
@@ -22,7 +22,7 @@ class HistoryViewModel: ObservableObject {
     private var currentOffset = 0
     private var cancellables = Set<AnyCancellable>()
 
-    init(dataSource: DataSource) {
+    init(dataSource: DataSourceProtocol) {
         self.dataSource = dataSource
 
         self.loadInitial()

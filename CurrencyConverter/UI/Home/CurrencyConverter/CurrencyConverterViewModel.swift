@@ -13,7 +13,7 @@ import SwiftUI
 class CurrencyConverterViewModel: ObservableObject {
 
     var currencyService: CurrencyServiceProtocol
-    var dataSource: DataSource
+    var dataSource: DataSourceProtocol
 
     @Published var fromCurrency: Currency = .USD
     @Published var toCurrency: Currency = .EUR
@@ -25,7 +25,7 @@ class CurrencyConverterViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     init(currencyService: CurrencyServiceProtocol,
-              dataSource: DataSource) {
+              dataSource: DataSourceProtocol) {
         self.currencyService = currencyService
         self.dataSource = dataSource
 
