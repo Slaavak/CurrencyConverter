@@ -1,5 +1,5 @@
 //
-//  ConvertationView.swift
+//  CurrencyConverterView.swift
 //  CurrencyConverter
 //
 //  Created by Slava Korolevich on 29/05/2025.
@@ -12,15 +12,9 @@ struct CurrencyConverterView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            CurrencyInputView(fromCurrency: $viewModel.fromCurrency,
-                                toCurrency: $viewModel.toCurrency,
-                                    amount: $viewModel.fromAmount,
-                                      rate: $viewModel.rate)
+            CurrencyInputView(viewModel: viewModel)
             swapButton
-            CurrencyOutputView(fromCurrency: $viewModel.fromCurrency,
-                                 toCurrency: $viewModel.toCurrency,
-                                     amount: $viewModel.toAmount,
-                                       rate: $viewModel.rate)
+            CurrencyOutputView(viewModel: viewModel)
             Spacer()
         }
         .padding(.horizontal)
@@ -45,6 +39,9 @@ private extension CurrencyConverterView {
 
 #Preview {
     let service = CurrencyService()
-    let viewModel = CurrencyConverterViewModel(currencyService: service)
+    let dataSource = DataSource(container: previewContainer,
+                                  context: previewContainer.mainContext)
+    let viewModel = CurrencyConverterViewModel(currencyService: service,
+                                                    dataSource: dataSource)
     CurrencyConverterView(viewModel: viewModel)
 }

@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct CurrencyOutputView: View {
-    @Binding var fromCurrency: Currency
-    @Binding var toCurrency: Currency
-    @Binding var amount: String
-    @Binding var rate: Double?
+    @ObservedObject var viewModel: CurrencyConverterViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
