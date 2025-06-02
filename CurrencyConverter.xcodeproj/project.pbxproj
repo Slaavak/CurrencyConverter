@@ -121,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				56214A1F2DE9152000B5E2FE /* Home */,
-				56214A132DE8FE4800B5E2FE /* Currency.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -162,6 +161,7 @@
 		56214A262DE922D400B5E2FE /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				56214A132DE8FE4800B5E2FE /* Currency.swift */,
 				56214A272DE9231C00B5E2FE /* LatestRateResponse.swift */,
 			);
 			path = Entities;
