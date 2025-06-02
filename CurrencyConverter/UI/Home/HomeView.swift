@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-    private var currencyService = CurrencyService()
+    private var currencyService = CurrencyService(cacheService: CurrencyCacheService())
     private var dataSource = DataSource(
         container: SwiftDataContextManager.shared.container,
         context: SwiftDataContextManager.shared.context

@@ -24,7 +24,7 @@ struct CurrencyOutputView: View {
             .buttonStyle(.plain)
             .padding(.bottom, 2)
 
-            if let rate = viewModel.rate {
+            if let rate = viewModel.rate, rate != 0 {
                 Text("1 \(viewModel.toCurrency.code) ≈ \(String(format: "%.2f", 1.0 / rate)) \(viewModel.fromCurrency.code)")
                     .font(.caption)
                     .foregroundColor(.gray)

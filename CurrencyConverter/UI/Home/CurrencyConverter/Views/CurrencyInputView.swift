@@ -32,7 +32,7 @@ struct CurrencyInputView: View {
                     .foregroundColor(.gray)
             }
 
-            TextField("Amount", text: $viewModel.fromAmount)
+            TextField(LocalizedStringKey("Amount"), text: $viewModel.fromAmount)
                 .keyboardType(.decimalPad)
                 .font(.largeTitle.bold())
                 .focused($isFocused)
