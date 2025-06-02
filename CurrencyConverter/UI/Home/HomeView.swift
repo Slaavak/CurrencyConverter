@@ -16,9 +16,28 @@ struct HomeView: View {
     )
 
     @State private var isExpanded = false
+    @State private var isActive = false
 
     var body: some View {
+        if isActive {
+            mainContentView
+        } else {
+            launchScreen
+        }
+    }
 
+    var launchScreen: some View {
+        LaunchScreenView()
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        isActive = true
+                    }
+                }
+            }
+    }
+
+    var mainContentView: some View {
         NavigationView {
             VStack {
                 if !isExpanded {

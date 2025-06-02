@@ -25,6 +25,7 @@
 		56214A2F2DE9387800B5E2FE /* CurrencyConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A2E2DE9387800B5E2FE /* CurrencyConverterViewModel.swift */; };
 		56214A312DE93E3400B5E2FE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 56214A302DE93E3400B5E2FE /* Config.xcconfig */; };
 		56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56214A322DE93FDA00B5E2FE /* Environment.swift */; };
+		565CC1AC2DEDA03C00E8E93E /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565CC1AB2DEDA03C00E8E93E /* LaunchScreenView.swift */; };
 		56B78C8B2DEA776E00DA6D01 /* CurrencyCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */; };
 		56B78C8E2DEAF41600DA6D01 /* CachedRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C8D2DEAF41600DA6D01 /* CachedRates.swift */; };
 		56B78C932DEAFB0800DA6D01 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B78C922DEAFB0800DA6D01 /* HistoryViewModel.swift */; };
@@ -55,6 +56,7 @@
 		56214A302DE93E3400B5E2FE /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		56214A322DE93FDA00B5E2FE /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		56214A342DE941FB00B5E2FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		565CC1AB2DEDA03C00E8E93E /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		56B78C8A2DEA776E00DA6D01 /* CurrencyCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCacheService.swift; sourceTree = "<group>"; };
 		56B78C8D2DEAF41600DA6D01 /* CachedRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedRates.swift; sourceTree = "<group>"; };
 		56B78C922DEAFB0800DA6D01 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				56214A092DE8FB7A00B5E2FE /* HomeView.swift */,
+				565CC1AB2DEDA03C00E8E93E /* LaunchScreenView.swift */,
 				56B78C8C2DEAF25500DA6D01 /* HistoryView */,
 				56214A2D2DE9383700B5E2FE /* CurrencyConverter */,
 			);
@@ -309,6 +312,7 @@
 				56214A2C2DE92B4900B5E2FE /* UrlBuilder.swift in Sources */,
 				56214A2A2DE92B3E00B5E2FE /* URLSession.swift in Sources */,
 				56214A332DE93FDA00B5E2FE /* Environment.swift in Sources */,
+				565CC1AC2DEDA03C00E8E93E /* LaunchScreenView.swift in Sources */,
 				56B78C8B2DEA776E00DA6D01 /* CurrencyCacheService.swift in Sources */,
 				56214A282DE9231C00B5E2FE /* LatestRateResponse.swift in Sources */,
 				56B78C8E2DEAF41600DA6D01 /* CachedRates.swift in Sources */,
