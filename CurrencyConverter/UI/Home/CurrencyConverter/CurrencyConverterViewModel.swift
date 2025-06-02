@@ -29,14 +29,14 @@ class CurrencyConverterViewModel: ObservableObject {
         self.currencyService = currencyService
         self.dataSource = dataSource
 
-        self.loadDefaultRates()
+        self.loadStoredCurrencies()
         self.setUpSubscriptions()
     }
 }
 
 //MARK: - Public
 extension CurrencyConverterViewModel {
-    func saveConvertation() {
+    func saveConversion() {
         guard let fromAmount = Double(self.fromAmount),
               let toAmount = Double(self.toAmount) else { return }
 
@@ -46,7 +46,7 @@ extension CurrencyConverterViewModel {
                            toCurrency: toCurrency,
                               toValue: toAmount)
 
-        Task {
+        Task.detached {
             await self.dataSource.insert(entity)
         }
     }
@@ -54,12 +54,16 @@ extension CurrencyConverterViewModel {
 
 //MARK: - Private
 private extension CurrencyConverterViewModel {
+    enum DefaultsKeys {
+        static let fromCurrency = "lastFromCurrency"
+        static let toCurrency = "lastToCurrency"
+    }
 
     func setUpSubscriptions() {
         $fromCurrency
             .sink { [weak self] currency in
                 guard let self else { return }
-                UserDefaults.standard.set(currency.rawValue, forKey: "lastFromCurrency")
+                UserDefaults.standard.set(currency.rawValue, forKey: DefaultsKeys.fromCurrency)
                 self.fetchRates(currency)
             }
             .store(in: &cancellables)
@@ -67,7 +71,7 @@ private extension CurrencyConverterViewModel {
         $toCurrency
             .sink { [weak self] currency in
                 guard let self else { return }
-                UserDefaults.standard.set(currency.rawValue, forKey: "lastToCurrency")
+                UserDefaults.standard.set(currency.rawValue, forKey: DefaultsKeys.toCurrency)
                 rate = currentRates[currency]
                 updateToAmount()
             }
@@ -86,18 +90,18 @@ private extension CurrencyConverterViewModel {
             .debounce(for: .seconds(2), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.saveConvertation()
+                self.saveConversion()
             }
             .store(in: &cancellables)
     }
 
-    func loadDefaultRates() {
-        if let fromRaw = UserDefaults.standard.string(forKey: "lastFromCurrency"),
+    func loadStoredCurrencies() {
+        if let fromRaw = UserDefaults.standard.string(forKey: DefaultsKeys.fromCurrency),
            let from = Currency(rawValue: fromRaw) {
             self.fromCurrency = from
         }
 
-        if let toRaw = UserDefaults.standard.string(forKey: "lastToCurrency"),
+        if let toRaw = UserDefaults.standard.string(forKey: DefaultsKeys.toCurrency),
            let to = Currency(rawValue: toRaw) {
             self.toCurrency = to
         }

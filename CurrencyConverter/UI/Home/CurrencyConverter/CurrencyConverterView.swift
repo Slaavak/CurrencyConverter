@@ -38,7 +38,7 @@ private extension CurrencyConverterView {
 }
 
 #Preview {
-    let service = CurrencyService()
+    let service = CurrencyService(cacheService: CurrencyCacheService())
     let dataSource = DataSource(container: previewContainer,
                                   context: previewContainer.mainContext)
     let viewModel = CurrencyConverterViewModel(currencyService: service,

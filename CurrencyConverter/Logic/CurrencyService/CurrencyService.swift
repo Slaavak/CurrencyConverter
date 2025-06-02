@@ -26,7 +26,7 @@ class CurrencyService {
     init(
         urlBuilder: UrlBuilderProtocol = UrlBuilder(),
         session: URLSessionProtocol = URLSession.shared,
-        cacheService: CurrencyCacheServiceProtocol = CurrencyCacheService()
+        cacheService: CurrencyCacheServiceProtocol
     ) {
         self.urlBuilder = urlBuilder
         self.session = session
@@ -37,8 +37,7 @@ class CurrencyService {
 extension CurrencyService: CurrencyServiceProtocol {
 
     func fetchRates(base: Currency, to currencies: [Currency]) async throws -> LatestRateResponse {
-        if let cached = cacheService.loadCachedRates(for: base) {
-            print("Take cache for base: \(base)")
+        if let cached = await cacheService.loadCachedRates(for: base) {
             return LatestRateResponse(data: cached.rates)
         }
 
@@ -49,7 +48,7 @@ extension CurrencyService: CurrencyServiceProtocol {
         do {
             let response: LatestRateResponse = try await fetch(url: url)
             let cached = CachedRates(base: base, rates: response.data, cachedAt: Date())
-            cacheService.save(cached)
+            await cacheService.save(cached)
             return response
         } catch {
             print(error.localizedDescription)
@@ -89,7 +88,6 @@ extension CurrencyService {
     }
 
     func log(_ request: URLRequest) {
-        let log = "request url: \(request.url!.absoluteString)"
-        print(log)
+        debugPrint("📡 Requesting: \(request.url?.absoluteString ?? "nil")")
     }
 }

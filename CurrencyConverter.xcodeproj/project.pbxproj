@@ -179,6 +179,14 @@
 			path = CurrencyConverter;
 			sourceTree = "<group>";
 		};
+		565CC1AF2DEE091800E8E93E /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				56214A0B2DE8FB7A00B5E2FE /* Record.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		56B78C8C2DEAF25500DA6D01 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,8 +233,8 @@
 		56B78CA62DEB700000DA6D01 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				565CC1AF2DEE091800E8E93E /* Entity */,
 				56B78CA72DEB700B00DA6D01 /* PreviewContainer.swift */,
-				56214A0B2DE8FB7A00B5E2FE /* Record.swift */,
 				56B78CAD2DEB73F800DA6D01 /* SwiftDataContextManager.swift */,
 				56B78CA92DEB710500DA6D01 /* DataSource.swift */,
 			);

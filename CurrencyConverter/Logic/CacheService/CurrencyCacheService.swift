@@ -8,31 +8,35 @@
 import Foundation
 
 protocol CurrencyCacheServiceProtocol {
-    func loadCachedRates(for base: Currency) -> CachedRates?
-    func save(_ rates: CachedRates)
-    func clearCache()
+    func loadCachedRates(for base: Currency) async -> CachedRates?
+    func save(_ rates: CachedRates) async
+    func clearCache() async
 }
 
-class CurrencyCacheService: CurrencyCacheServiceProtocol {
+actor CurrencyCacheService: CurrencyCacheServiceProtocol {
     private let fileManager = FileManager.default
     private var cacheURL: URL {
         fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("currency_cache.json")
     }
 
-    func loadCachedRates(for base: Currency) -> CachedRates? {
-        guard let data = try? Data(contentsOf: cacheURL),
-              let cachedList = try? JSONDecoder().decode([CachedRates].self, from: data),
-              let cached = cachedList.first(where: { $0.base == base }),
-              isCacheValid(cached) else {
-            return nil
+    func loadCachedRates(for base: Currency) async -> CachedRates? {
+        do {
+            let data = try Data(contentsOf: self.cacheURL)
+            if let cachedList = try? JSONDecoder().decode([CachedRates].self, from: data),
+               let cached = cachedList.first(where: { $0.base == base }),
+               self.isCacheValid(cached) {
+                return cached
+            }
+        } catch {
+            print("Failed to read cache: \(error)")
         }
-        return cached
+        return nil
     }
 
-    func save(_ rates: CachedRates) {
+    func save(_ rates: CachedRates) async {
         var existingList: [CachedRates] = []
 
-        if let data = try? Data(contentsOf: cacheURL),
+        if let data = try? Data(contentsOf: self.cacheURL),
            let decoded = try? JSONDecoder().decode([CachedRates].self, from: data) {
             existingList = decoded
         }
@@ -44,10 +48,14 @@ class CurrencyCacheService: CurrencyCacheServiceProtocol {
         }
 
         guard let encoded = try? JSONEncoder().encode(existingList) else { return }
-        try? encoded.write(to: cacheURL)
+        do {
+            try encoded.write(to: self.cacheURL)
+        } catch {
+            print("Failed to write cache: \(error)")
+        }
     }
 
-    func clearCache() {
+    func clearCache() async {
         try? fileManager.removeItem(at: cacheURL)
     }
 }
