@@ -75,7 +75,9 @@ struct HistoryView: View {
                     .padding(.vertical, 4)
                     .onAppear {
                         if isExpanded, item == items.last {
-                            viewModel.loadMore()
+                            Task {
+                                await viewModel.loadMore()
+                            }
                         }
                     }
                 }

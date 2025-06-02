@@ -9,6 +9,11 @@ import Foundation
 import SwiftData
 import Combine
 
+protocol DataSourceProtocol: AnyObject {
+    func insert(_ entity: Record) async
+    func fetchRecords(limit: Int, offset: Int) async -> [Record]
+}
+
 @MainActor
 class DataSource {
 
@@ -23,14 +28,15 @@ class DataSource {
     }
 }
 
-extension DataSource {
-    func insert(_ entity: Record) {
+// MARK: Public
+extension DataSource: DataSourceProtocol {
+    func insert(_ entity: Record) async {
         self.container?.mainContext.insert(entity)
         try? self.container?.mainContext.save()
         didInsertRecord.send()
     }
 
-    func fetchRecords(limit: Int = 20, offset: Int = 0) -> [Record] {
+    func fetchRecords(limit: Int = 20, offset: Int = 0) async -> [Record] {
         var fetchDescriptor = FetchDescriptor<Record>()
         fetchDescriptor.sortBy = [SortDescriptor(\.timestamp, order: .reverse)]
         fetchDescriptor.fetchLimit = limit

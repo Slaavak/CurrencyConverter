@@ -50,10 +50,10 @@ class HistoryViewModel: ObservableObject {
 
 //MARK: - Public
 extension HistoryViewModel {
-    func loadMore() {
+    func loadMore() async {
         guard hasMoreItems else { return }
 
-        let fetched = dataSource.fetchRecords(limit: pageSize, offset: currentOffset)
+        let fetched = await dataSource.fetchRecords(limit: pageSize, offset: currentOffset)
         items.append(contentsOf: fetched)
         currentOffset += fetched.count
         hasMoreItems = fetched.count == pageSize
@@ -67,15 +67,19 @@ private extension HistoryViewModel {
             .receive(on: RunLoop.main)
             .sink { [weak self] in
                 guard let self else { return }
-                self.items = dataSource.fetchRecords()
+                Task {
+                    self.items = await self.dataSource.fetchRecords()
+                }
             }
             .store(in: &cancellables)
     }
 
     func loadInitial() {
-        let fetched = dataSource.fetchRecords(limit: pageSize)
-        items = fetched
-        currentOffset = fetched.count
-        hasMoreItems = fetched.count == pageSize
+        Task {
+            let fetched = await dataSource.fetchRecords(limit: pageSize)
+            items = fetched
+            currentOffset = fetched.count
+            hasMoreItems = fetched.count == pageSize
+        }
     }
 }

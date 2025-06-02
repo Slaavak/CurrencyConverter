@@ -45,7 +45,10 @@ extension CurrencyConverterViewModel {
                             fromValue: fromAmount,
                            toCurrency: toCurrency,
                               toValue: toAmount)
-        dataSource.insert(entity)
+
+        Task {
+            await self.dataSource.insert(entity)
+        }
     }
 }
 
@@ -71,12 +74,18 @@ private extension CurrencyConverterViewModel {
             .store(in: &cancellables)
 
         $fromAmount
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.updateToAmount()
+            }
+            .store(in: &cancellables)
+
+        $fromAmount
             .dropFirst(1)
             .removeDuplicates()
             .debounce(for: .seconds(2), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.updateToAmount()
                 self.saveConvertation()
             }
             .store(in: &cancellables)
