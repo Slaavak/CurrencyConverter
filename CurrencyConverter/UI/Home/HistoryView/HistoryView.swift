@@ -21,7 +21,7 @@ struct HistoryView: View {
     private var headerView: some View {
         HStack {
             if !isExpanded {
-                Text("История")
+                Text("History")
                     .font(.title2)
                     .bold()
                 Spacer()
@@ -30,7 +30,7 @@ struct HistoryView: View {
                         isExpanded.toggle()
                     }
                 } label: {
-                    Text("Вся история")
+                    Text("All history")
                         .font(.subheadline)
                 }
             }
@@ -48,7 +48,7 @@ struct HistoryView: View {
                     .scaledToFit()
                     .frame(width: 64, height: 64)
                     .foregroundColor(.gray)
-                Text("История пуста")
+                Text("History is empty")
                     .font(.headline)
                     .foregroundColor(.gray)
                 Spacer()
@@ -90,7 +90,7 @@ struct HistoryView: View {
                 }
             }
             .if(isExpanded) {
-                $0.searchable(text: $viewModel.searchText, prompt: "Поиск по валютам или суммам")
+                $0.searchable(text: $viewModel.searchText, prompt: "Sum and currency search")
             }
         }
     }

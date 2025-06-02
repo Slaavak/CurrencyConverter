@@ -53,39 +53,39 @@ enum Currency: String, CaseIterable, Identifiable, Hashable {
 
     var title: String {
         switch self {
-        case .EUR: return "Euro"
-        case .USD: return "US Dollar"
-        case .JPY: return "Japanese Yen"
-        case .BGN: return "Bulgarian Lev"
-        case .CZK: return "Czech Republic Koruna"
-        case .DKK: return "Danish Krone"
-        case .GBP: return "British Pound Sterling"
-        case .HUF: return "Hungarian Forint"
-        case .PLN: return "Polish Zloty"
-        case .RON: return "Romanian Leu"
-        case .SEK: return "Swedish Krona"
-        case .CHF: return "Swiss Franc"
-        case .ISK: return "Icelandic Króna"
-        case .NOK: return "Norwegian Krone"
-        case .HRK: return "Croatian Kuna"
-        case .RUB: return "Russian Ruble"
-        case .TRY: return "Turkish Lira"
-        case .AUD: return "Australian Dollar"
-        case .BRL: return "Brazilian Real"
-        case .CAD: return "Canadian Dollar"
-        case .CNY: return "Chinese Yuan"
-        case .HKD: return "Hong Kong Dollar"
-        case .IDR: return "Indonesian Rupiah"
-        case .ILS: return "Israeli New Sheqel"
-        case .INR: return "Indian Rupee"
-        case .KRW: return "South Korean Won"
-        case .MXN: return "Mexican Peso"
-        case .MYR: return "Malaysian Ringgit"
-        case .NZD: return "New Zealand Dollar"
-        case .PHP: return "Philippine Peso"
-        case .SGD: return "Singapore Dollar"
-        case .THB: return "Thai Baht"
-        case .ZAR: return "South African Rand"
+        case .EUR: return String(localized: "Euro")
+        case .USD: return String(localized: "US Dollar")
+        case .JPY: return String(localized: "Japanese Yen")
+        case .BGN: return String(localized: "Bulgarian Lev")
+        case .CZK: return String(localized: "Czech Republic Koruna")
+        case .DKK: return String(localized: "Danish Krone")
+        case .GBP: return String(localized: "British Pound Sterling")
+        case .HUF: return String(localized: "Hungarian Forint")
+        case .PLN: return String(localized: "Polish Zloty")
+        case .RON: return String(localized: "Romanian Leu")
+        case .SEK: return String(localized: "Swedish Krona")
+        case .CHF: return String(localized: "Swiss Franc")
+        case .ISK: return String(localized: "Icelandic Króna")
+        case .NOK: return String(localized: "Norwegian Krone")
+        case .HRK: return String(localized: "Croatian Kuna")
+        case .RUB: return String(localized: "Russian Ruble")
+        case .TRY: return String(localized: "Turkish Lira")
+        case .AUD: return String(localized: "Australian Dollar")
+        case .BRL: return String(localized: "Brazilian Real")
+        case .CAD: return String(localized: "Canadian Dollar")
+        case .CNY: return String(localized: "Chinese Yuan")
+        case .HKD: return String(localized: "Hong Kong Dollar")
+        case .IDR: return String(localized: "Indonesian Rupiah")
+        case .ILS: return String(localized: "Israeli New Sheqel")
+        case .INR: return String(localized: "Indian Rupee")
+        case .KRW: return String(localized: "South Korean Won")
+        case .MXN: return String(localized: "Mexican Peso")
+        case .MYR: return String(localized: "Malaysian Ringgit")
+        case .NZD: return String(localized: "New Zealand Dollar")
+        case .PHP: return String(localized: "Philippine Peso")
+        case .SGD: return String(localized: "Singapore Dollar")
+        case .THB: return String(localized: "Thai Baht")
+        case .ZAR: return String(localized: "South African Rand")
         }
     }
 }
