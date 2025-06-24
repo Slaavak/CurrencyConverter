@@ -54,6 +54,7 @@ extension CurrencyConverterViewModel {
 
 //MARK: - Private
 private extension CurrencyConverterViewModel {
+
     enum DefaultsKeys {
         static let fromCurrency = "lastFromCurrency"
         static let toCurrency = "lastToCurrency"
